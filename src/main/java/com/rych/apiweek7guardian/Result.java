@@ -1,14 +1,12 @@
 
 package com.rych.apiweek7guardian;
 
-import java.util.HashMap;
-import java.util.Map;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -24,9 +22,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "pillarId",
     "pillarName"
 })
+@Entity
 public class Result {
 
     @JsonProperty("id")
+    @Id
     public String id;
     @JsonProperty("type")
     public String type;
@@ -48,17 +48,5 @@ public class Result {
     public String pillarId;
     @JsonProperty("pillarName")
     public String pillarName;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }
