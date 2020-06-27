@@ -18,7 +18,7 @@ public class NewsService {
         this.newsRepository = newsRepository;
     }
 
-    public List<Result> bla(){
+    public List<Result> getNews(){
         News news = restTemplate.getForObject("https://content.guardianapis.com/search?api-key=55d96216-6d52-4f95-b52a-ee427353bfe6", News.class);
         news.response.results.forEach(result ->{
             if(newsRepository.existsById(result.id)== false) {
@@ -28,4 +28,11 @@ public class NewsService {
         return newsRepository.findAll();
     }
 
+    public boolean update(Result result) {
+        if(newsRepository.existsById(result.id) == false){
+            return false;
+        }
+        newsRepository.save(result);
+        return true;
+    }
 }
